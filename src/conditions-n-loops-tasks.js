@@ -87,11 +87,7 @@ function canQueenCaptureKing(/* queen, king */) {
 function isIsoscelesTriangle(a, b, c) {
   let isTrue = false;
   if (a + c > b && a + b > c && c + b > a) {
-    if (a === b || a === c || c === b) {
-      isTrue = true;
-    }
-  } else {
-    isTrue = false;
+    if (a === b || a === c || c === b) isTrue = true;
   }
   return isTrue;
 }
