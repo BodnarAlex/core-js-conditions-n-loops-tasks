@@ -363,8 +363,6 @@ function getSpiralMatrix(size) {
   let max = size - 1;
   for (let k = 0; k <= iterations; k += 1) {
     res[i][j] = k + 1;
-    console.log(k, '.) i = ', i, 'j = ', j);
-
     if (i === min && j < max) {
       j += 1;
     } else if (i < max && j === max) {
@@ -379,7 +377,6 @@ function getSpiralMatrix(size) {
       i -= 1;
     }
   }
-  console.log(res);
   return res;
 }
 
@@ -500,8 +497,30 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  let newArr = [...`${number}`];
+  const size = newArr.length - 1;
+  for (let i = size - 1; i >= 0; i -= 1) {
+    if (newArr[i + 1] > newArr[i]) {
+      for (let j = size; j > i; j -= 1) {
+        if (newArr[i] < newArr[j]) {
+          const temp = newArr[i];
+          newArr[i] = newArr[j];
+          newArr[j] = temp;
+
+          j = i;
+          i += 1;
+
+          const left = newArr.splice(0, i);
+          const right = newArr.reverse();
+          newArr = [...left, ...right];
+        }
+      }
+      const res = newArr.reduce((prev, now) => prev + now, '');
+      return Number(res);
+    }
+  }
+  return number;
 }
 
 module.exports = {
